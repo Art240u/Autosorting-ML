@@ -1,33 +1,26 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="globals.css" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="desktop">
-      <div class="group">
-        <div class="rectangle"></div>
-        <div class="text-wrapper">Progress bar</div>
-      </div>
-      <div class="div">
-        <div class="rectangle-2"></div>
-        <div class="text-wrapper-2">изначальное количество</div>
-      </div>
-      <div class="group-2">
-        <div class="rectangle-2"></div>
-        <div class="text-wrapper-3">промежуточное количество</div>
-      </div>
-      <div class="group-3">
-        <div class="rectangle-2"></div>
-        <div class="text-wrapper-4">итоговое количество</div>
-      </div>
-      <div class="group-4">
-        <div class="rectangle-3"></div>
-        <div class="text-wrapper-5">кнопка для начала расчёта</div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="topSide"> <!-- Часть верхнего оформления --> </div>
+  <div class="main">
+    <div class="mainBlockGroup">
+      <!-- <video class="cameraOutput"></video> -->
+      <!-- <img class="cameraOutput"> -->
+      <!-- Блоки временно закоммитил, не уверен в формате получаемых файлов -->
+      <div class="progressLine">
+        <label id="progressLabel">Прогресс сканирования</label>
+        <progress id="progressBar" value="0.15"> 15% </progress>
       </div>
     </div>
-  </body>
+    <div class="dataBlockGroup"> Блоки с данными </div>
+  </div>
+  
+</body>
 </html>

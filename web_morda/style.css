@@ -1,140 +1,66 @@
-.desktop {
-  background-color: #ffffff;
+/* Таблица стилей всех классов index.html */
+
+body{
+  margin: 0;
+}
+
+.topSide{
   width: 100%;
-  min-width: 1440px;
-  min-height: 1024px;
-  position: relative;
+  height: 8vh;
+
+  background-color: blanchedalmond;
 }
 
-.desktop .group {
-  position: absolute;
-  top: 52px;
-  left: 41px;
-  width: 1358px;
-  height: 64px;
+.main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 20vh;
+
+  padding-top: 1vh;
 }
 
-.desktop .rectangle {
-  width: 1356px;
-  height: 64px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #d9d9d9;
+.mainBlockGroup{
+  width: 100%;
+  height: 100%;
+
+  padding-left: 1vh;
+  padding-right: 1vh;
+
+  margin-left: 2vh;
+
+  background-color: blanchedalmond;
+
+  border-radius: 1vh;
 }
 
-.desktop .text-wrapper {
-  position: absolute;
-  top: 0;
-  left: 551px;
-  width: 456px;
-  font-family: "Inter-Regular", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 40px;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
+.dataBlockGroup{
+  width: 100%;
+  height: 100%;
+
+  margin-left: 3vh;
+  margin-right: 2vh;
+
+  padding-left: 1vh;
+  padding-right: 1vh;
+
+  background-color: blanchedalmond;
+
+  border-radius: 1vh;
 }
 
-.desktop .div {
-  position: absolute;
-  top: 320px;
-  left: 34px;
-  width: 413px;
-  height: 232px;
+.progressLine{
+  display: grid;
+  justify-items: center;
 }
 
-.desktop .rectangle-2 {
-  width: 411px;
-  height: 232px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #d9d9d9;
+#progressLabel{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.desktop .text-wrapper-2 {
-  top: 85px;
-  left: 14px;
-  width: 396px;
-  font-size: 20px;
-  position: absolute;
-  font-family: "Inter-Regular", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  letter-spacing: 0;
-  line-height: normal;
-}
-
-.desktop .group-2 {
-  position: absolute;
-  top: 320px;
-  left: 512px;
-  width: 477px;
-  height: 232px;
-}
-
-.desktop .text-wrapper-3 {
-  top: 77px;
-  left: 25px;
-  width: 450px;
-  font-size: 20px;
-  position: absolute;
-  font-family: "Inter-Regular", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  letter-spacing: 0;
-  line-height: normal;
-}
-
-.desktop .group-3 {
-  position: absolute;
-  top: 320px;
-  left: 993px;
-  width: 413px;
-  height: 232px;
-}
-
-.desktop .text-wrapper-4 {
-  top: 77px;
-  left: 39px;
-  width: 335px;
-  font-size: 20px;
-  position: absolute;
-  font-family: "Inter-Regular", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  letter-spacing: 0;
-  line-height: normal;
-}
-
-.desktop .group-4 {
-  position: absolute;
-  top: 659px;
-  left: 445px;
-  width: 550px;
-  height: 190px;
-}
-
-.desktop .rectangle-3 {
-  width: 548px;
-  height: 190px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #d9d9d9;
-}
-
-.desktop .text-wrapper-5 {
-  top: 95px;
-  left: 6px;
-  font-size: 40px;
-  white-space: nowrap;
-  position: absolute;
-  font-family: "Inter-Regular", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  letter-spacing: 0;
-  line-height: normal;
+#progressBar{
+  block-size: 2em;
+  inline-size: 40em;
 }
