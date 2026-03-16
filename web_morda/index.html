@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./style.css">
-  <title>Document</title>
+  <title>AutosortML</title>
 </head>
 <body>
   <div class="topSide"> <!-- Часть верхнего оформления --> </div>
   <div class="main">
     <div class="mainBlockGroup">
-      <!-- <video class="cameraOutput"></video> -->
-      <!-- <img class="cameraOutput"> -->
-      <!-- Блоки временно закоммитил, не уверен в формате получаемых файлов -->
+      <video id="videoOutput" controls autoplay muted></video>
+      
       <div class="progressLine">
         <label id="progressLabel">Прогресс сканирования</label>
         <progress id="progressBar" value="0.15"> 15% </progress>
@@ -21,6 +20,19 @@
     </div>
     <div class="dataBlockGroup"> Блоки с данными </div>
   </div>
-  
+  <div class="bottomSide">
+    <!-- Пустая заготовка, можно под краткое руководство-->
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+      if (Hls.isSupported()) {
+        const video = document.getElementById('videoOutput');
+        const hls = new Hls();
+        hls.loadSource('');
+        hls.attachMedia(video);
+      }
+    </script>
+  <!-- В hls.loadSource нужно указать путь до сервера и папки, можно локальный -->
 </body>
 </html>
