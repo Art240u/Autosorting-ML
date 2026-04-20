@@ -11,14 +11,18 @@
   <div class="topSide"> <!-- Часть верхнего оформления --> </div>
   <div class="main">
     <div class="mainBlockGroup">
-      <video id="videoOutput" controls autoplay muted></video>
-      
+      <video id="videoOutput" src="../test-media.mp4" width="640" height="360" controls autoplay muted></video>
+      <!--Видео исключительно для проверки, удалите если нужно-->
       <div class="progressLine">
         <label id="progressLabel">Прогресс сканирования</label>
         <progress id="progressBar" value="0.15"> 15% </progress>
+        <!--Не совсем уверен, нужна ли нам шкала прогресса;
+        value нужно задавать в коде, сейчас стоит временный-->
       </div>
     </div>
-    <div class="dataBlockGroup"> Блоки с данными </div>
+    <div id="elementList" class="dataBlockGroup">Элементы в кадре:
+      <!-- В этом блоке нужно создавать <div> или <p> элементы для текста-->
+    </div>
   </div>
   <div class="bottomSide">
     <!-- Пустая заготовка, можно под краткое руководство-->
