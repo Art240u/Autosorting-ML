@@ -1,33 +1,42 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="globals.css" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="desktop">
-      <div class="group">
-        <div class="rectangle"></div>
-        <div class="text-wrapper">Progress bar</div>
-      </div>
-      <div class="div">
-        <div class="rectangle-2"></div>
-        <div class="text-wrapper-2">изначальное количество</div>
-      </div>
-      <div class="group-2">
-        <div class="rectangle-2"></div>
-        <div class="text-wrapper-3">промежуточное количество</div>
-      </div>
-      <div class="group-3">
-        <div class="rectangle-2"></div>
-        <div class="text-wrapper-4">итоговое количество</div>
-      </div>
-      <div class="group-4">
-        <div class="rectangle-3"></div>
-        <div class="text-wrapper-5">кнопка для начала расчёта</div>
-      </div>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Камера — Видеопоток</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Камера</h1>
+
+    <div class="video-container">
+        <video id="video" autoplay playsinline muted></video>
+        <div class="overlay" id="overlay">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                 stroke-width="1.2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0
+                         01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0
+                         002.25-2.25v-9A2.25 2.25 0 0013.5 5.25h-9A2.25 2.25 0
+                         002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/>
+            </svg>
+            <p>Нажмите «Запустить» для доступа к камере</p>
+        </div>
     </div>
-  </body>
+
+    <div class="controls">
+        <button class="btn-start" id="btnStart">Запустить</button>
+        <button class="btn-stop" id="btnStop" disabled>Остановить</button>
+    </div>
+
+    <div class="status" id="status">
+        <span class="dot"></span>
+        <span id="statusText">Камера не активна</span>
+    </div>
+
+    <div class="error-msg" id="errorMsg"></div>
+    <script src="script.js"></script>
+
+</body>
 </html>

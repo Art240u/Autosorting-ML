@@ -1,140 +1,167 @@
-.desktop {
-  background-color: #ffffff;
-  width: 100%;
-  min-width: 1440px;
-  min-height: 1024px;
-  position: relative;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.desktop .group {
-  position: absolute;
-  top: 52px;
-  left: 41px;
-  width: 1358px;
-  height: 64px;
+body {
+    min-height: 100vh;
+    background: #0a0a0f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    overflow: hidden;
 }
 
-.desktop .rectangle {
-  width: 1356px;
-  height: 64px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #d9d9d9;
+h1 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #888;
 }
 
-.desktop .text-wrapper {
-  position: absolute;
-  top: 0;
-  left: 551px;
-  width: 456px;
-  font-family: "Inter-Regular", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 40px;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
+.video-container {
+    position: relative;
+    width: 90vw;
+    max-width: 960px;
+    aspect-ratio: 16 / 9;
+    background: #111;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(100, 100, 255, 0.08);
+    border: 1px solid #222;
 }
 
-.desktop .div {
-  position: absolute;
-  top: 320px;
-  left: 34px;
-  width: 413px;
-  height: 232px;
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-.desktop .rectangle-2 {
-  width: 411px;
-  height: 232px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #d9d9d9;
+/* Оверлей когда камера не запущена */
+.overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    transition: opacity 0.4s ease;
+    z-index: 2;
 }
 
-.desktop .text-wrapper-2 {
-  top: 85px;
-  left: 14px;
-  width: 396px;
-  font-size: 20px;
-  position: absolute;
-  font-family: "Inter-Regular", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  letter-spacing: 0;
-  line-height: normal;
+.overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
-.desktop .group-2 {
-  position: absolute;
-  top: 320px;
-  left: 512px;
-  width: 477px;
-  height: 232px;
+.overlay svg {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+    stroke: #555;
 }
 
-.desktop .text-wrapper-3 {
-  top: 77px;
-  left: 25px;
-  width: 450px;
-  font-size: 20px;
-  position: absolute;
-  font-family: "Inter-Regular", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  letter-spacing: 0;
-  line-height: normal;
+.overlay p {
+    color: #555;
+    font-size: 0.95rem;
 }
 
-.desktop .group-3 {
-  position: absolute;
-  top: 320px;
-  left: 993px;
-  width: 413px;
-  height: 232px;
+/* Кнопки управления */
+.controls {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
 }
 
-.desktop .text-wrapper-4 {
-  top: 77px;
-  left: 39px;
-  width: 335px;
-  font-size: 20px;
-  position: absolute;
-  font-family: "Inter-Regular", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  letter-spacing: 0;
-  line-height: normal;
+button {
+    padding: 12px 32px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: 0.5px;
 }
 
-.desktop .group-4 {
-  position: absolute;
-  top: 659px;
-  left: 445px;
-  width: 550px;
-  height: 190px;
+.btn-start {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: #fff;
 }
 
-.desktop .rectangle-3 {
-  width: 548px;
-  height: 190px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #d9d9d9;
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(79, 70, 229, 0.4);
 }
 
-.desktop .text-wrapper-5 {
-  top: 95px;
-  left: 6px;
-  font-size: 40px;
-  white-space: nowrap;
-  position: absolute;
-  font-family: "Inter-Regular", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  letter-spacing: 0;
-  line-height: normal;
+.btn-stop {
+    background: #1a1a2e;
+    color: #e74c5e;
+    border: 1px solid #e74c5e44;
+}
+
+.btn-stop:hover {
+    background: #e74c5e;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(231, 76, 94, 0.3);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* Статус */
+.status {
+    margin-top: 16px;
+    font-size: 0.8rem;
+    color: #444;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #333;
+    transition: background 0.3s ease;
+}
+
+.status.active .dot {
+    background: #22c55e;
+    box-shadow: 0 0 10px #22c55e88;
+    animation: pulse 1.5s infinite;
+}
+
+.status.error .dot {
+    background: #e74c5e;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* Сообщение об ошибке */
+.error-msg {
+    margin-top: 12px;
+    color: #e74c5e;
+    font-size: 0.85rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.error-msg.visible {
+    opacity: 1;
 }
