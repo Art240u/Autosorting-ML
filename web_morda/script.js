@@ -15,8 +15,8 @@ async function startCamera() {
     try {
         stream = await navigator.mediaDevices.getUserMedia({
             video: {
-                width:  { ideal: 1920 },
-                height: { ideal: 1080 },
+                width:  { ideal: 3265 },
+                height: { ideal: 1440 },
                 facingMode: 'user'
             },
             audio: false
