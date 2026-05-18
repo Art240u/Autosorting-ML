@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Камера — Видеопоток</title>
+    <!-- Подключаем TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.17.0/dist/tf.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Камера — Видеопоток</h1>
+        
+        <div class="video-wrapper">
+            <video id="video" autoplay playsinline muted></video>
+            <div id="overlay">Камера</div>
+        </div>
+
+        <div class="controls">
+            <button id="btnStart">Запустить</button>
+            <button id="btnStop" disabled>Остановить</button>
+        </div>
+
+        <div id="status" class="status">
+            <span id="statusText">Камера не активна</span>
+        </div>
+        <div id="errorMsg" class="error"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
