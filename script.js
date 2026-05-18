@@ -1,11 +1,13 @@
 // ---------- DOM элементы ---------------------------------------------------------------------------------------------
-const video      = document.getElementById('video');
-const overlay    = document.getElementById('overlay');
-const btnStart   = document.getElementById('btnStart');
-const btnStop    = document.getElementById('btnStop');
-const status     = document.getElementById('status');
-const statusText = document.getElementById('statusText');
-const errorMsg   = document.getElementById('errorMsg');
+const video         = document.getElementById('video');
+const overlay       = document.getElementById('overlay');
+const overlayCanvas = document.getElementById('overlayCanvas');
+const btnStart      = document.getElementById('btnStart');
+const btnStop       = document.getElementById('btnStop');
+const status        = document.getElementById('status');
+const statusText    = document.getElementById('statusText');
+const errorMsg      = document.getElementById('errorMsg');
+const ctx           = overlayCanvas.getContext('2d');
 
 // ---------- Глобальное состояние -------------------------------------------------------------------------------------
 let stream = null;
@@ -17,7 +19,7 @@ let frameCounter = 0;
 // Настройки детектора
 const MODEL_PATH = './model/model.json'; // Путь к папке с моделью
 const MODEL_INPUT_SIZE = 640;            // Размер, с которым модель экспортировалась (по умолчанию 640)
-const CONF_THRESHOLD = 0.45;             // Минимальная уверенность
+const CONF_THRESHOLD = 0.9;             // Минимальная уверенность
 const IOU_THRESHOLD  = 0.35;             // Порог NMS (подавление дубликатов)
 const NUM_CLASSES    = 1;                // 1 класс: lego
 const PROCESS_EVERY  = 3;                // Обрабатывать каждый N-й кадр
@@ -135,7 +137,7 @@ function processNextFrame() {
         return;
     }
 
-    // 1. Letterbox-препроцессинг (сохранение пропорций + серый фон)
+    // 1. Letterbox-препроцессинг
     const scale = Math.min(MODEL_INPUT_SIZE / vidW, MODEL_INPUT_SIZE / vidH);
     const newW = vidW * scale;
     const newH = vidH * scale;
@@ -146,7 +148,7 @@ function processNextFrame() {
     prepCtx.fillRect(0, 0, MODEL_INPUT_SIZE, MODEL_INPUT_SIZE);
     prepCtx.drawImage(video, padX, padY, newW, newH);
 
-    // 2. Инференс + постпроцессинг внутри tf.tidy() (критично для отсутствия утечек памяти)
+    // 2. Инференс
     tf.tidy(() => {
         const inputTensor = tf.browser.fromPixels(prepCanvas)
             .toFloat()
@@ -156,6 +158,9 @@ function processNextFrame() {
         const output = model.predict(inputTensor);
         window.yoloDetections = decodeYOLOv8Output(output, vidW, vidH, scale, padX, padY);
     });
+
+    // 3. Отрисовка
+    drawDetections(window.yoloDetections);
 
     animationId = requestAnimationFrame(processNextFrame);
 }
@@ -219,6 +224,48 @@ function decodeYOLOv8Output(outputTensor, origW, origH, scale, padX, padY) {
     }
 
     return nonMaxSuppression(boxes, IOU_THRESHOLD);
+}
+
+// ---------- Отрисовка рамок -----------------------------------------------------------------------------------------
+function drawDetections(detections) {
+    // Устанавливаем размеры канваса равными размерам видео
+    const vidRect = video.getBoundingClientRect();
+    overlayCanvas.width = vidRect.width;
+    overlayCanvas.height = vidRect.height;
+
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+    detections.forEach(det => {
+        const [x1, y1] = det.bottomLeft;
+        const [x2, y2] = det.topRight;
+
+        // Масштабируем координаты к размерам отображаемого видео
+        const scaleX = ctx.canvas.width / video.videoWidth;
+        const scaleY = ctx.canvas.height / video.videoHeight;
+
+        const x1s = x1 * scaleX;
+        const y1s = y1 * scaleY;
+        const x2s = x2 * scaleX;
+        const y2s = y2 * scaleY;
+        const width  = x2s - x1s;
+        const height = y2s - y1s;
+
+        // Рисуем рамку
+        ctx.strokeStyle = '#00ff00';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(x1s, y1s, width, height);
+
+        // Подпись
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        ctx.fillRect(x1s, y1s - 20, width, 20);
+        ctx.font = '14px sans-serif';
+        ctx.fillStyle = '#fff';
+        ctx.fillText(
+            `${det.className} ${(det.confidence * 100).toFixed(1)}%`,
+            x1s + 4,
+            y1s - 5
+        );
+    });
 }
 
 // ---------- NMS (Подавление дубликатов) ------------------------------------------------------------------------------
