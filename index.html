@@ -16,8 +16,20 @@
             <video id="video" autoplay playsinline muted></video>
             <canvas id="overlayCanvas" class="detection-canvas"></canvas>
             <div id="overlay">Камера</div>
+            <div id="counter" class="detection-counter">Объектов: 0</div>
         </div>
-
+        <div class="stats-panel">
+            <div class="stat-item">
+                <label>Текущих объектов:</label>
+                <span id="currentCounter">0</span>
+            </div>
+             <div class="stat-item">
+                <label>Всего обнаружено:</label>
+                <span id="totalCounter">0</span>
+            </div>
+            <button id="resetTotal" class="btn-reset">Сбросить счётчик</button>
+        </div>
+        
         <div class="controls">
             <button id="btnStart">Запустить</button>
             <button id="btnStop" disabled>Остановить</button>

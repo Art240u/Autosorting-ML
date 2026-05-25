@@ -8,6 +8,9 @@ const status        = document.getElementById('status');
 const statusText    = document.getElementById('statusText');
 const errorMsg      = document.getElementById('errorMsg');
 const ctx           = overlayCanvas.getContext('2d');
+const currentCounter = document.getElementById('currentCounter'); // текущие на кадре
+const totalCounter   = document.getElementById('totalCounter');   // всего за сессию
+const resetTotalBtn  = document.getElementById('resetTotal');
 
 // ---------- Глобальное состояние -------------------------------------------------------------------------------------
 let stream = null;
@@ -15,11 +18,12 @@ let model = null;
 let isProcessing = false;
 let animationId = null;
 let frameCounter = 0;
+let totalDetections = 0;
 
 // Настройки детектора
 const MODEL_PATH = './model/model.json'; // Путь к папке с моделью
 const MODEL_INPUT_SIZE = 640;            // Размер, с которым модель экспортировалась (по умолчанию 640)
-const CONF_THRESHOLD = 0.9;             // Минимальная уверенность
+const CONF_THRESHOLD = 0.8;             // Минимальная уверенность
 const IOU_THRESHOLD  = 0.35;             // Порог NMS (подавление дубликатов)
 const NUM_CLASSES    = 1;                // 1 класс: lego
 const PROCESS_EVERY  = 3;                // Обрабатывать каждый N-й кадр
@@ -266,6 +270,22 @@ function drawDetections(detections) {
             y1s - 5
         );
     });
+
+    // === Обновляем счётчик ===
+    const counter = document.getElementById('counter');
+    if (counter) {
+        counter.textContent = `Объектов: ${detections.length}`;
+    }
+
+    // Увеличиваем общий счётчик только при новых детекциях (чтобы не дублировать)
+    // Можно добавлять один раз на кадр, или по количеству — зависит от логики.
+    // Здесь: увеличиваем на количество объектов в этом кадре
+    if (detections.length > 0 && isProcessing) {
+        totalDetections += detections.length;
+        if (totalCounter) {
+            totalCounter.textContent = totalDetections;
+        }
+    }
 }
 
 // ---------- NMS (Подавление дубликатов) ------------------------------------------------------------------------------
@@ -326,3 +346,13 @@ function translateError(err) {
 // ---------- Обработчики кнопок ---------------------------------------------------------------------------------------
 btnStart.addEventListener('click', startCamera);
 btnStop.addEventListener('click', stopCamera);
+// --- Кнопка сброса общего счётчика ---
+if (resetTotalBtn) {
+    resetTotalBtn.addEventListener('click', () => {
+        totalDetections = 0;
+        if (totalCounter) {
+            totalCounter.textContent = '0';
+        }
+        console.log('✅ Общий счётчик сброшен');
+    });
+}
