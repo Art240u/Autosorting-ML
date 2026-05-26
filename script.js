@@ -271,15 +271,12 @@ function drawDetections(detections) {
         );
     });
 
-    // === Обновляем счётчик ===
-    const counter = document.getElementById('counter');
-    if (counter) {
-        counter.textContent = `Объектов: ${detections.length}`;
+    // === Обновляем счётчик текущих объектов ===
+    if (currentCounter) {
+        currentCounter.textContent = detections.length;
     }
 
-    // Увеличиваем общий счётчик только при новых детекциях (чтобы не дублировать)
-    // Можно добавлять один раз на кадр, или по количеству — зависит от логики.
-    // Здесь: увеличиваем на количество объектов в этом кадре
+    // Увеличиваем общий счётчик только при новых детекциях
     if (detections.length > 0 && isProcessing) {
         totalDetections += detections.length;
         if (totalCounter) {
